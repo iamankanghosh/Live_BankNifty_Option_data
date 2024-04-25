@@ -135,7 +135,7 @@ app.get('/', async (req, res) => {
     }
 });
 function printHello() {
-    axios.get('https://live-banknifty-option-data.onrender.com/verify')
+    axios.get('https://live-banknifty-option-data.onrender.com/')
         .then(response => {
             console.log('API called successfully:');
         })
