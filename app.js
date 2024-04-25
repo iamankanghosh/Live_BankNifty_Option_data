@@ -127,13 +127,24 @@ app.get('/fetchSVG', async (req, res) => {
     }
 });
 
-app.get('/verify', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         res.send({msg:"msg from server"});
     } catch (error) {
         res.status(500).json({ error: 'Error fetching SVG' });
     }
 });
+function printHello() {
+    axios.get('https://live-banknifty-option-data.onrender.com/verify')
+        .then(response => {
+            console.log('API called successfully:');
+        })
+        .catch(error => {
+            console.error('Error occurred while calling API:');
+        });
+}
+
+setInterval(printHello, 10000); 
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

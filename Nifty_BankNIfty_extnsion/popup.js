@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Call the function immediately
   fetchAndUpdateData(
-    'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=23',
+    'https://live-banknifty-option-data.onrender.com/banknifty',
     document.getElementById('BN_LASTPRICE'),
     document.getElementById('BN_CHANGE'),
     document.getElementById('BN_PERCENTCHANGE'),
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
   );
 
   fetchAndUpdateData(
-    'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=9',
+    'https://live-banknifty-option-data.onrender.com/nifty50',
     document.getElementById('N_LASTPRICE'),
     document.getElementById('N_CHANGE'),
     document.getElementById('N_PERCENTCHANGE'),
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Call the function every 2 seconds
   setInterval(function () {
     fetchAndUpdateData(
-      'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=23',
+      'https://live-banknifty-option-data.onrender.com/banknifty',
       document.getElementById('BN_LASTPRICE'),
       document.getElementById('BN_CHANGE'),
       document.getElementById('BN_PERCENTCHANGE'),
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
     fetchAndUpdateData(
-      'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=9',
+      'https://live-banknifty-option-data.onrender.com/nifty50',
       document.getElementById('N_LASTPRICE'),
       document.getElementById('N_CHANGE'),
       document.getElementById('N_PERCENTCHANGE'),
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function fetchOptionData() {
     var callstrike = document.getElementById('callstrike');
     var callprice = document.getElementById('callprice');
-    fetch('http://localhost:4500/upstox/call/fetchData', {
+    fetch('https://live-banknifty-option-data.onrender.com/upstox/call/fetchData', {
       method: 'GET',
     })
     .then(response => response.json())
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
     var putstrike = document.getElementById('putstrike');
     var putprice = document.getElementById('putprice');
-    fetch('http://localhost:4500/upstox/put/fetchData', {
+    fetch('https://live-banknifty-option-data.onrender.com/upstox/put/fetchData', {
       method: 'GET',
     })
     .then(response => response.json())
