@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "NSE Nifty & BankNIfty",
+    "version": "1.0",
+    "description": "Get live current price",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png",
+        "options": {
+            "type": "popup",
+            "width": 400,
+            "height": 400
+        }
+    },
+    "icons": {
+        "48": "icon.png"
+    },
+    "permissions": [
+        "declarativeNetRequest",
+        "https://appfeeds.moneycontrol.com/"
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';"
+    }
+}

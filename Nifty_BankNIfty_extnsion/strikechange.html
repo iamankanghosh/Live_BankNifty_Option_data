@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strike Change</title>
+    <style>
+ 
+
+ /* Flex container for form elements */
+ .form-container {
+    display: flex;
+    align-items: center; /* Vertically center the elements */
+    margin-bottom: 10px; /* Add some space between forms */
+  }
+
+  /* Margin between label and input */
+  .form-container label {
+    margin-right: 10px;
+  }
+
+  /* Smaller input field */
+  .form-container input[type="number"] {
+    width: 100px; /* Adjust the width as needed */
+    margin-right: 10px;
+  }
+    </style>
+</head>
+<body>
+    <!-- First Form -->
+  <form action="http://localhost:4500/updateData/callKey" method="post" class="form-container">
+    <label for="call-strike">Set Call Strike</label>
+    <input type="number" id="call-strike" name="value">
+    <input type="submit" value="Submit">
+  </form>
+
+  <!-- Second Form -->
+  <form action="http://localhost:4500/updateData/putKey" method="post" class="form-container">
+    <label for="put-strike">Set Put  Strike</label>
+    <input type="number" id="put-strike" name="value">
+    <input type="submit" value="Submit">
+  </form>
+
+
+  <form id="myForm" action="http://localhost:4500/updateData/expiryDate" method="post">
+    <label for="value">Set Expiry Date</label>
+    <input type="date" id="value" name="value">
+    <input type="submit" value="Submit" >
+  </form>
+
+  
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoneyControl Extension</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      width: 300px;
+      /* Set the desired width */
+      height: 300px;
+      /* Set the desired height */
+      overflow-y: auto;
+      /* Add vertical scrollbar if content exceeds the height */
+    }
+
+    .nse-data-container {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .nse-data-header {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+
+    .data-row {
+      display: flex;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+
+    .data-label {
+      width: auto;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .data-value {
+      margin-left: 10px;
+      text-align: right;
+    }
+
+    .price-chart-container {
+      position: relative;
+      /* Added for positioning the dot */
+      height: 10px;
+      background: #fff;
+      /* Set to white */
+      border: 1px solid #000;
+      /* Set black border */
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .price-chart {
+      height: 100%;
+      width: 0;
+      background: #fff;
+      /* Set to white */
+    }
+
+    .bn-current-price-dot {
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      background-color: #000;
+      /* Dot color */
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .n-current-price-dot {
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      background-color: #000;
+      /* Dot color */
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+           /* Style for Call and Put Divs */
+           .call-put-container>div {
+      display: inline-block;
+      margin-right: 10px;
+      /* Adjust spacing between elements */
+    }
+
+    /* Style for Labels */
+    .call-put-container>div:nth-child(odd) {
+      font-weight: bold;
+    }
+
+    /* .call-put-container>div:nth-child(even) {
+    } */
+
+
+    .container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+}
+
+.links a {
+  margin: 0 10px; /* Adjust margin as needed */
+  text-decoration: none; /* Remove default underline */
+  color: #0066cc; /* Set link color */
+}
+
+.links a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+
+
+  </style>
+</head>
+
+<body>
+  <div class="nse-data-container">
+    <!-- <h2 class="nse-data-header">NSE Data</h2> -->
+
+    <!-- Bank Nifty Section -->
+    <div id="resultBN">
+      <h3>Bank Nifty</h3>
+      <div class="data-row">
+        <span class="data-label">Curr Price:</span>
+        <div class="data-value" id="BN_LASTPRICE"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Change:</span>
+        <div class="data-value" id="BN_CHANGE"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Percent Change:</span>
+        <div class="data-value" id="BN_PERCENTCHANGE"></div>%
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today High:</span>
+        <div class="data-value" id="BN_HIGH"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today Low:</span>
+        <div class="data-value" id="BN_LOW"></div>
+      </div>
+      <div class="price-chart-container">
+        <div class="price-chart" id="BN_PRICE_CHART"></div>
+      </div>
+    </div>
+
+    <!-- Nifty 50 Section -->
+    <div id="resultN">
+      <h3>Nifty 50</h3>
+      <div class="data-row">
+        <span class="data-label">Curr Price:</span>
+        <div class="data-value" id="N_LASTPRICE"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Change:</span>
+        <div class="data-value" id="N_CHANGE"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Percent Change:</span>
+        <div class="data-value" id="N_PERCENTCHANGE"></div>%
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today High:</span>
+        <div class="data-value" id="N_HIGH"></div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today Low:</span>
+        <div class="data-value" id="N_LOW"></div>
+      </div>
+      <div class="price-chart-container">
+        <div class="price-chart" id="N_PRICE_CHART"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="call-put-container">
+      <div>Call Strike :</div>
+      <div id="callstrike"></div>
+      <div>Price :</div>
+      <div id="callprice"></div>
+    </div>
+    <div class="call-put-container">
+      <div>Put Strike :</div>
+      <div id="putstrike"></div>
+      <div>Price :</div>
+      <div id="putprice"></div>
+    </div>
+  
+  <p></p>
+    <div class="container">
+      <div class="links">
+        <a href="market.html" target="_blank">Overall Market</a>
+        <a href="strikechange.html" target="_blank">Strike Change</a>
+      </div>
+    </div>
+    
+  </div>
+
+
+
+  
+
+
+
+
+  <div style="text-align: center; margin-top: 20px; ">
+    Created by <a href="https://github.com/iamankanghosh" target="_blank">Ankan Ghosh</a>
+  </div>
+
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
