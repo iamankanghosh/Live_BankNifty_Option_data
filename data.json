@@ -1,0 +1,70 @@
+[
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 114.6,
+    "putPriceKey": 100.2
+  },
+  {
+    "date": "29/10/2024",
+    "callPriceKey": "24350.0",
+    "callvalue": 114.6,
+    "putPriceKey": "24350.0",
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": "24350.0",
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "22/09/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "22/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  },
+  {
+    "date": "28/10/2024",
+    "callPriceKey": 24350,
+    "callvalue": 114.6,
+    "putPriceKey": 24350,
+    "putvalue": 100.2
+  }
+]
