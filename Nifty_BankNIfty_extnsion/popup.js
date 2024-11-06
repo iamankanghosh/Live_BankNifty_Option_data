@@ -118,8 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       data.callKey = parseFloat(data.callKey);
       callstrike.innerText = JSON.stringify(data.callKey);
-      callprice.innerText = JSON.stringify(data.ltp);
-      callpriceChange.innerText = JSON.stringify(data.pChange);
+      // callprice.innerText = JSON.stringify(data.ltp);
+      callprice.innerText = data.ltp;
+      callpriceChange.innerText = data.pChange;
 
     })
     .catch(error => {
@@ -140,9 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       data.putKey = parseFloat(data.putKey);
       putstrike.innerText = JSON.stringify(data.putKey);
-      putprice.innerText = JSON.stringify(data.ltp);
-      putpriceChange.innerText = JSON.stringify(data.pChange);
-
+      // putprice.innerText = JSON.stringify(data.ltp);
+      // putpriceChange.innerText = JSON.stringify(data.pChange);
+      putprice.innerText = data.ltp;
+      putpriceChange.innerText = data.pChange;
     })
     .catch(error => {
       putstrike.innerText = 'NA';
