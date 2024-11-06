@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function fetchOptionData() {
     var callstrike = document.getElementById('callstrike');
     var callprice = document.getElementById('callprice');
+    var callpriceChange = document.getElementById('callpriceChange');
     fetch('https://live-banknifty-option-data.onrender.com/upstox/call/fetchData', {
       method: 'GET',
     })
@@ -118,14 +119,20 @@ document.addEventListener('DOMContentLoaded', function () {
       data.callKey = parseFloat(data.callKey);
       callstrike.innerText = JSON.stringify(data.callKey);
       callprice.innerText = JSON.stringify(data.ltp);
+      callpriceChange.innerText = JSON.stringify(data.pChange);
+
     })
     .catch(error => {
       callstrike.innerText = 'NA';
       callprice.innerText = 'NA';
+      callpriceChange.innerText =  'NA';
+
     });
   
     var putstrike = document.getElementById('putstrike');
     var putprice = document.getElementById('putprice');
+
+    var putpriceChange = document.getElementById('putpriceChange');
     fetch('https://live-banknifty-option-data.onrender.com/upstox/put/fetchData', {
       method: 'GET',
     })
@@ -134,10 +141,13 @@ document.addEventListener('DOMContentLoaded', function () {
       data.putKey = parseFloat(data.putKey);
       putstrike.innerText = JSON.stringify(data.putKey);
       putprice.innerText = JSON.stringify(data.ltp);
+      putpriceChange.innerText = JSON.stringify(data.pChange);
+
     })
     .catch(error => {
       putstrike.innerText = 'NA';
       putprice.innerText = 'NA';
+      putpriceChange.innerText =  'NA';
     });
   }
   // fetchOptionData();

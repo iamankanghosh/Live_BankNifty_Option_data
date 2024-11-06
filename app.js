@@ -78,29 +78,39 @@ app.get('/banknifty', async (req, res) => {
 app.get('/upstox/call/fetchData', async (req, res) => {
     const { expiryDate, upstoxurl, callKey, putKey } = require('./expiary_strike_data.js');
     try {
-        const response = await axios.get(upstoxurl + expiryDate);
-        const upstoxdata = response.data.data.strategyChainData.strikeMap;
+        // const response = await axios.get(upstoxurl + expiryDate);
+        // const upstoxdata = response.data.data.strategyChainData.strikeMap;
 
-        const objectForcall = upstoxdata[callKey];
-        const ltp = objectForcall.callOptionData.marketData.ltp;
+        // const objectForcall = upstoxdata[callKey];
+        // const ltp = objectForcall.callOptionData.marketData.ltp;
 
-        res.json({ callKey, ltp });
+        const perresponse = await axios.get(`https://groww.in/v1/api/option_chain_service/v1/option_chain/nifty`);
+        const percObjectCall = perresponse.data.optionChains.find(option => option.strikePrice === callKey*100)
+
+
+        res.json({ callKey, ltp : percObjectCall.callOption.ltp.toFixed(2), 
+            pChange:percObjectCall.callOption.dayChangePerc.toFixed(2) });
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).json({ error: 'Error fetching data' });
     }
 });
 app.get('/upstox/put/fetchData', async (req, res) => {
-    const { expiryDate, upstoxurl, callKey, putKey } = require('./expiary_strike_data.js');
+    let { expiryDate, upstoxurl, callKey, putKey } = require('./expiary_strike_data.js');
     try {
-        const response = await axios.get(upstoxurl + expiryDate);
-        const upstoxdata = response.data.data.strategyChainData.strikeMap;
+        // const response = await axios.get(upstoxurl+expiryDate);
+        // const upstoxdata = response.data.data.strategyChainData.strikeMap;
 
-        const objectForPut = upstoxdata[putKey];
+        // const objectForPut = upstoxdata[putKey];
 
-        const ltp = objectForPut.putOptionData.marketData.ltp;
+        // const ltp = objectForPut.putOptionData.marketData.ltp;
 
-        res.json({ putKey, ltp });
+        const perresponse = await axios.get(`https://groww.in/v1/api/option_chain_service/v1/option_chain/nifty`);
+
+        const percObjectPut = perresponse.data.optionChains.find(option => option.strikePrice === putKey*100)
+
+        res.json({ putKey, ltp : percObjectPut.putOption.ltp.toFixed(2),
+            pChange:percObjectPut.putOption.dayChangePerc.toFixed(2) });
     } catch (error) {
         console.error('Error fetching data:', error.message);
         res.status(500).json({ error: 'Error fetching data' });
@@ -355,7 +365,7 @@ function getResult() {
 }
 
 // Call the function
-getResult();
+// getResult();
 
 setInterval(getResult, 24 * 60 * 60 * 1000); 
 
