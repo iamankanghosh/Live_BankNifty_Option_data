@@ -12,6 +12,36 @@ const PORT = process.env.PORT || 4500;
 app.use(cors());
 app.use(express.json());
 
+const checkTime = () => {
+    const currentDate = new Date();
+    
+    // Convert to IST (Asia/Kolkata)
+    const options = {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,  // 24-hour format
+    };
+  
+    const { hour, minute } = new Intl.DateTimeFormat('en-IN', options)
+      .formatToParts(currentDate)
+      .reduce((acc, part) => {
+        if (part.type === 'hour') acc.hour = part.value;
+        if (part.type === 'minute') acc.minute = part.value;
+        return acc;
+      }, {});
+  
+    console.log(`Current Time in IST: ${hour}:${minute}`);
+  
+    // Check if it's 09:30 AM IST
+    if (hour === '09' && minute === '30') {
+      return true;
+    }
+    else{
+        return false;
+    }
+
+  };
 
 app.get('/banknifty', async (req, res) => {
     try {
@@ -201,6 +231,84 @@ function printHello() {
 setInterval(printHello, 10000); 
 
 
+
+const algo  = async ()=> {
+    if (checkTime()) {
+        const { expiryDate, upstoxurl, callKey, putKey } = require('./expiary_strike_data.js');
+
+
+        const response = await axios.get(upstoxurl + expiryDate);
+        const upstoxdata = response.data.data.strategyChainData.strikeMap;
+        // console.log(typeof(upstoxdata));
+        let callfind = false;
+        let callPriceKey ;
+        let callvalue;
+    
+        let putfind = false;
+        let putPriceKey ;
+        let putvalue;
+        const keys = Object.keys(upstoxdata);
+    
+        keys.forEach((key, index) => {
+            const prevKey = index > 0 ? keys[index - 1] : null;
+             if (upstoxdata[key].callOptionData.marketData.ltp < 100 && !callfind ) {
+                callfind = true;
+                // console.log('call side ',prevKey,upstoxdata[prevKey].callOptionData.marketData.ltp);
+                callPriceKey = prevKey;
+                callvalue = upstoxdata[prevKey].callOptionData.marketData.ltp;
+            } 
+            if (upstoxdata[key].putOptionData.marketData.ltp > 100 && !putfind ) {
+                putfind = true;
+                // console.log('put side',key,upstoxdata[key].putOptionData.marketData.ltp);
+                putPriceKey = key
+                putvalue = upstoxdata[key].putOptionData.marketData.ltp
+            } 
+        });
+        // console.log(callPriceKey, putPriceKey);
+        const curr_date = new Date().toLocaleDateString('en-GB');
+    
+    
+        const newData = { date: curr_date, callPriceKey : parseInt(callPriceKey) , callvalue , putPriceKey : parseInt(putPriceKey) , putvalue };
+        // console.log(newData);
+    
+        // Step 1: Read the existing JSON file
+        fs.readFile('data.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading the file:', err);
+            return;
+        }
+    
+        try {
+            // Step 2: Parse the JSON string into an array of objects
+            const jsonArray = JSON.parse(data);
+    
+            // Step 3: Add the new data to the array
+            jsonArray.push(newData);
+    
+            // Step 4: Convert the updated array back to a JSON string
+            const updatedJson = JSON.stringify(jsonArray, null, 2);
+    
+            // Step 5: Write the updated JSON back to the file
+            fs.writeFile('data.json', updatedJson, (err) => {
+            if (err) {
+                console.error('Error writing to file:', err);
+            } else {
+                console.log('Data has been added and file updated successfully.');
+            }
+            });
+        } catch (parseErr) {
+            console.error('Error parsing JSON:', parseErr);
+        }
+        });
+    }
+    
+   
+}
+// algo();
+
+setInterval(algo, 60 * 1000); 
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
@@ -239,7 +347,6 @@ function getResult() {
                 // console.log('Current length of resultData:', resultData.length);
             });
             resultData.sort((a, b) => b.marketCap - a.marketCap);
-            // console.log(resultData);
 
             fs.writeFile('resultData.json', JSON.stringify(resultData, null, 2), (err) => {
                 if (err) {
