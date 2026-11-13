@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const API_BASE_URL = 'http://localhost:4500';
-  const FALLBACK_NIFTY_URL = 'https://live-banknifty-option-data.onrender.com/nifty50';
+  // const API_BASE_URL = 'http://localhost:4500';
+  // const FALLBACK_NIFTY_URL = 'https://live-banknifty-option-data.onrender.com/nifty50';
+
+  const API_BASE_URL = 'https://live-banknifty-option-data.onrender.com';
+  const FALLBACK_NIFTY_URL = 'http://localhost:4500';
 
   function formatInr(value) {
     if (value === null || value === undefined || Number.isNaN(Number(value))) {
