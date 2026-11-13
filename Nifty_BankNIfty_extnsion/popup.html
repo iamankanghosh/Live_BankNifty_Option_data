@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nifty 50 & Gold Extension</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 10px;
+      width: 330px;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    .nse-data-container {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    h3 {
+      margin: 6px 0 8px 0;
+      font-size: 15px;
+    }
+
+    .section-divider {
+      border-top: 1px solid #ddd;
+      margin: 10px 0;
+      padding-top: 6px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .data-label {
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .data-value {
+      margin-left: 10px;
+      text-align: right;
+    }
+
+    .price-chart-container {
+      position: relative;
+      height: 10px;
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .price-chart {
+      height: 100%;
+      width: 0;
+      background: #fff;
+    }
+
+    .n-current-price-dot {
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      background-color: #000;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .gold-meta {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-size: 13px;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nse-data-container">
+    <!-- Nifty 50 Section -->
+    <div id="resultN">
+      <h3>Nifty 50</h3>
+      <div class="data-row">
+        <span class="data-label">Curr Price:</span>
+        <div class="data-value" id="N_LASTPRICE">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Change:</span>
+        <div class="data-value" id="N_CHANGE">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Percent Change:</span>
+        <div class="data-value"><span id="N_PERCENTCHANGE">--</span>%</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today High:</span>
+        <div class="data-value" id="N_HIGH">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Today Low:</span>
+        <div class="data-value" id="N_LOW">--</div>
+      </div>
+      <div class="price-chart-container">
+        <div class="price-chart" id="N_PRICE_CHART"></div>
+      </div>
+    </div>
+
+    <!-- Gold & ETF Section -->
+    <div id="resultGold" class="section-divider">
+      <h3>Gold Prices (INR)</h3>
+      <div class="gold-meta" id="GOLD_META">Loading...</div>
+      <div class="data-row">
+        <span class="data-label">24K Gold (10g):</span>
+        <div class="data-value" id="GOLD_24K">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">22K Gold (10g):</span>
+        <div class="data-value" id="GOLD_22K">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">SBI Gold ETF:</span>
+        <div class="data-value" id="SBI_GOLD_ETF">--</div>
+      </div>
+      <div class="data-row">
+        <span class="data-label">ICICI Gold ETF:</span>
+        <div class="data-value" id="ICICI_GOLD_ETF">--</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="links">
+        <a href="market.html" target="_blank">Overall Market</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 12px; font-size: 12px;">
+    Created by <a href="https://github.com/iamankanghosh" target="_blank">Ankan Ghosh</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
